@@ -1,15 +1,19 @@
 # Made with love by Karl
 # Contact me on Telegram: @karlpy
 
-from util.UnitConverter import ConvertToSystem
-from util.Parser import Parser
-import config
-
+# Reorganized imports per PEP8 guidelines
+import csv
 from datetime import datetime, date, timedelta
-import requests, csv
+from io import StringIO
+from time import sleep
+
 from lxml import etree
 import lxml.html as lh
-from io import StringIO
+import requests
+
+import config
+from util.UnitConverter import ConvertToSystem
+from util.Parser import Parser
 
 # configuration
 stations_file = open('stations.txt', 'r')
@@ -70,6 +74,7 @@ def scrap_station(weather_station_url):
                 
             print(f'Saving {len(data_to_write)} rows')
             writer.writerows(data_to_write)
+            sleep(10) # 10 sec pause per robots.txt
 
 
 for url in URLS:
